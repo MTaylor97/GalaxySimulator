@@ -1,16 +1,43 @@
-# This is a sample Python script.
+import pygame
+from sys import exit
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+pygame.init()
+
+# create screen
+screen = pygame.display.set_mode((1400, 900))
+pygame.display.set_caption('Autonomous Car IoT')
+clock = pygame.time.Clock()
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# define Car class
+class Entity:
+    def __init__(self, x, y, mass, direction):
+        self.mass = mass
+        self.direction = direction
+        self.speedX = 5
+        self.speedY = 5
+        self.x = x
+        self.y = y
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+class Planet(Entity):
+    def __init__(self, x, y, direction, mass):
+        super().__init__(x, y, mass, direction)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+class Sun(Entity):
+    def __init__(self, x, y, direction, mass):
+        super().__init__(x, y, mass, direction)
+
+
+while True:
+
+    # facilitate exiting of program
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            exit()
+
+    # update everything
+    pygame.display.update()
+    clock.tick(60)
